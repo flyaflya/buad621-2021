@@ -6,7 +6,7 @@
 library(nycflights13)
 library(dplyr)
 
-### this is just showing the last line of the ppt
+### this is just showing the last line of video
 starwars[1:10,] %>%
   select(name, species) %>%
   mutate(isDroidFlag = 
@@ -16,7 +16,7 @@ starwars[1:10,] %>%
             
 
 ## Now demo dplyr functionality with data from nycflights13
-## Show the dataframe in the RStudio envirnoment
+## Show the dataframe in the RStudio environment
 flights = flights
 
 ## just fyi, there are lots of datasets already in R
@@ -72,7 +72,7 @@ destDF = summarise(destinations,
 )
 destDF
 
-####{Class Exercise:} In a separate script, create a new data fram called sortDestDF that orders (i.e. arranges the destDF dataframe in descending order of popularity(i.e. number of flights from NYC to that destination) to discover the most popular places people from New York City fly to.
+####{Class Exercise:} In a separate script, create a new data frame called sortDestDF that orders (i.e. arranges the destDF dataframe in descending order of popularity - i.e. number of flights from NYC to that destination) to discover the most popular places people from New York City fly to.
 
 
 
@@ -98,4 +98,4 @@ flights %>%
 
 ####{Class Exercise:} In a separate script, use the chaining operator, %>%, to find which of the New York City airports experience the highest average departure delay.
 
-## Back to PPT
+
