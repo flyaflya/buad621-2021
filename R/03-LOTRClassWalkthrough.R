@@ -89,27 +89,16 @@ lotr_untidy  ## notice more than one observation per row
 # like tidy data ... making untidy data for presentation
 # or graphical purposes is the last step in your data workflow
 
-## We are still violating one of the fundamental principles of __tidy data__. ## "Word count" is a fundamental variable in our dataset and it's currently ## spread out over two variables, `Female` and `Male`. Conceptually, we need to ## gather up the word counts into a single variable and create a new variable, ## `Gender`, to track whether each count refers to females or males. We use the ## `gather()` function from the tidyr package to do this.
+## We are still violating one of the fundamental principles of __tidy data__. ## "Word count" is a fundamental variable in our dataset and it's currently ## spread out over two variables, `Female` and `Male`. Conceptually, we need to ## consolidate the two word counts into a single column of word counts and create a new variable, ## `Gender`, to track whether each count refers to females or males. We use the ## `pivot_longer()` function from the tidyr package to do this.
 
 lotr_tidy <- lotr_untidy %>%
-  gather(key = 'Gender', value = 'Words', Female, Male)
+  pivot_longer(cols = c(Female, Male), names_to = 'Gender', values_to = 'Words')
 lotr_tidy
 ## ```
 ## 
 ## Tidy data ... mission accomplished!
 ## 
-## To explain our call to `gather()` above, 
-## let's read it from right to left: we 
-## took the variables `Female` and `Male` and 
-## gathered their *values* into a 
-## single new variable `Words`. This forced  
-## the creation of a companion variable 
-## `Gender`, a *key*, which tells whether a specific 
-## value of `Words` came from 
-## `Female` or `Male`. 
-## All other variables, such as `Film`, 
-## remain unchanged and 
-## are simply replicated as needed. 
+
 
 ## ---------------------------------------------
 
@@ -118,25 +107,25 @@ lotr_tidy
 #       1. [Female.csv](data/Female.csv)
 #       2. [Male.csv](data/Male.csv)
 #  Use the read_csv function to read both files.
-#  Combine the files into a tidy data frame using gather()
+#  Combine the files into a tidy data frame using bind_rows()
+#   and pivot_longer()
 
 ## ---------------------------------------------
 
-## SPREAD() is Opposite of GATHER()  ... here are some examples
+## pivot_wider() is the opposite of pivot_longer()  ... here are some examples
 
 ## rememeber what the tidy data looks like
 lotr_tidy
 
-## practicing with spread: let's get one variable per Race
+## practicing with pivot_wider(): let's get one variable per Race
 lotr_tidy %>% 
-  spread(key = Race, value = Words)
+  pivot_wider(names_from = Race, values_from = Words)
 
-## practicing with spread: let's get one variable per Gender
+## practicing with pivot_wider(): let's get one variable per Gender
 lotr_tidy %>% 
-  spread(key = Gender, value = Words)
+  pivot_wider(names_from = Gender, values_from = Words)
 
-## these non-tidy dataframes can make for good tables and
-## visualizations as needed.  Humans like them.
+## these non-tidy dataframes can make for good tables - humans like them.
 ## For your computer though, store tidy data.
 
 

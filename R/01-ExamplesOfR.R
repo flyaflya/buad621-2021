@@ -1,6 +1,6 @@
 # use CTRL + ENTER to run each line
 # the # symbol is used as a comment
-# install.packages("tidyvere")
+# install.packages("tidyverse")
 library(tidyverse)
 
 ####################################################################
@@ -52,6 +52,17 @@ ggplot(data = newDF) +  ## create a plot with data from newDF
              color = "purple",
              size = 6)# Plot the x,y points as a blue line.
 
+# animate a plot if its helpful
+# install.packages(c("gifski","gganimate"))
+library(gganimate)
+ggplot(data = newDF) +  ## same code as above
+  geom_point(aes(x = xVar, 
+                 y = yVar),
+             color = "purple",
+             size = 6) +
+  ## gganimate specific code
+  transition_states(xVar)
+
 ## using functions
 mean(x = 1:6) # argument explicitly named
 mean(1:6)   # argument implied by position
@@ -90,13 +101,6 @@ ggplot(superbowl) +
 
 ###opening a webpage
 shell.exec("http://en.wikipedia.org/wiki/Super_Bowl_indicator")
-
-###looking at first 31 superbowls
-ggplot(data = superbowl[1:31, ],
-       aes(x = DowJonesSimpleReturn, fill = Winner)) +
-  geom_dotplot(binwidth = 0.05) +
-  facet_grid(Winner ~ .) +
-  ylim(0, 6)
 
 ###looking at all points
 ggplot(superbowl,
